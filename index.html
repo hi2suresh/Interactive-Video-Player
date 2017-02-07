@@ -8,16 +8,21 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito|Lato|Open+Sans" rel="stylesheet">
      <script src="js/jquery.js"></script>    
      <script src="js/mediaelement-and-player.min.js"></script>
+     
      <link rel="stylesheet" href="js/mediaelementplayer.min.css" />
     <link rel="stylesheet" href="main.css">
+    <script>
+        $(document).ready(function(){$('video, audio').mediaelementplayer();});
+    </script>
 </head>
 
 <body>
     <div id="container">
      <div id="media">
-         <video width="320" height="240" controls>
+         <video id="my_video_1"  style="width:100%;height:100%;" controls="controls" width="100%" height="100%">
             <source type="video/mp4" src="media/video.mp4" />
              <source type="video/ogg" src="media/video.ogg" />
+             <track id="subtitles" kind="subtitles" src="captions.vtt" srclang="en" />
          </video>
      </div>
       <div id="transcript">

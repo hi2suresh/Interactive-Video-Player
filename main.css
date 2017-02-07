@@ -9,3 +9,13 @@
 body{
     background: white;
 }
+
+#container {
+    width: 90%;
+}
+
+@media (min-width:768px){
+    #container {
+    width: 60%;    
+}
+}
