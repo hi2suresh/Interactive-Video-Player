@@ -52,28 +52,44 @@
         
     </div>
         <script>
-            
-//            $(document).ready(function(){$('video, audio').mediaelementplayer();});
+          
+           
             var player = new MediaElementPlayer('#my_video', {
                 pluginPath: '../build/',
-                success: function(mediaElement, originalNode) {
-                 var videoElement = document.querySelector('video');
-                 var textTrack = videoElement.textTracks[0];
-                 var previouslyActiveCueId = '1';
+                success: function(mediaElement, originalNode) {               
+                
+
+            }
+        });
+               var videoElement = document.querySelector('video');
+                var textTrack = videoElement.textTracks[0];
+                var previouslyActiveCueId = '1';
+                var cueStartTimes = {};
+                setTimeout(function(){               
+                     for(var i=1; i<textTrack.cues.length; i++){
+                         cueStartTimes[i.toString()] = textTrack.cues[i-1].startTime;                     
+                     }                  
               
+             }, 100);   
+             
+             var spans = document.getElementsByTagName('span');
+                    for(i=0;i<spans.length;i++)
+                        spans[i].onclick=changeVideoCurrentTime;
+
+                    function changeVideoCurrentTime(){   
+                        console.log(cueStartTimes[this.id]);
+                        videoElement.currentTime = cueStartTimes[this.id];
+                    }
+                 
+               
               textTrack.addEventListener('cuechange', function() {
                   if(this.activeCues.length === 1){
                   var currentlyActiveCueId = this.activeCues[0].id;
                   document.getElementById(previouslyActiveCueId).style.color='black';
                   document.getElementById(currentlyActiveCueId).style.color='blue';
-                  previouslyActiveCueId = currentlyActiveCueId;
+                  previouslyActiveCueId = currentlyActiveCueId;               
                 }
               });
-              
-                
-
-            }
-        });
           
    
     </script>
