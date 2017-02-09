@@ -6,10 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
     <link href="https://fonts.googleapis.com/css?family=Nunito|Lato|Open+Sans" rel="stylesheet">
-     <script src="js/jquery.js"></script>    
-     <script src="js/mediaelement-and-player.min.js"></script>
+     <!--<script src="js/jquery.js"></script>    
+     <script src="js/mediaelement-and-player.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="js/js-webshim/minified/polyfiller.js"></script>
+<!--    <script>
+        webshim.setOptions('basePath', 'js/js-webshim/minified/shims');
+        webshim.polyfill('mediaelement track ');        
+    </script>-->
+    <script src="https://cdn.jsdelivr.net/mediaelement/3.1.1/mediaelement-and-player.min.js"></script>
      
-     <link rel="stylesheet" href="js/mediaelementplayer.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/mediaelement/3.1.1/mediaelementplayer.min.css">
     <link rel="stylesheet" href="main.css">
     
 </head>
@@ -55,13 +63,14 @@
           
            
             var player = new MediaElementPlayer('#my_video', {
-                pluginPath: '../build/',
+                pluginPath: 'js/js-webshim/minified/shims',
                 success: function(mediaElement, originalNode) {               
-                
+               
 
             }
         });
-               var videoElement = document.querySelector('video');
+
+                var videoElement = player.$media[0];
                 var textTrack = videoElement.textTracks[0];
                 var previouslyActiveCueId = '1';
                 var cueStartTimes = {};
@@ -76,8 +85,7 @@
                     for(i=0;i<spans.length;i++)
                         spans[i].onclick=changeVideoCurrentTime;
 
-                    function changeVideoCurrentTime(){   
-                        console.log(cueStartTimes[this.id]);
+                    function changeVideoCurrentTime(){
                         videoElement.currentTime = cueStartTimes[this.id];
                     }
                  
