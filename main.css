@@ -22,6 +22,32 @@ body{
 }
 
 
+
+.mejs__controls .mejs__playpause-button,
+ .mejs__captions-button{
+    background: orange !important;
+   
+}
+
+.mejs__currenttime-container,
+.mejs__volume-button {
+    background: black !important;
+}
+
+.mejs__time-slider{
+    background:#f44242 !important;
+    }
+
+.mejs__fullscreen-button {
+    background: lightblue;
+}
+
+.mejs__captions-position {
+    font-size: 0.9em !important;
+    line-height: 16px !important;
+    bottom: 40px;
+}
+
 @media (min-width:768px){
 #container {
     width: 60%;    
@@ -33,4 +59,16 @@ body{
 #container p{
    width: 100%;
 }
+    
+
+
+
+
+}
+
+@media (min-width:1024px){
+   .mejs__captions-position {   
+   font-size: 16px !important;   
+    bottom: 30px;
+} 
 }

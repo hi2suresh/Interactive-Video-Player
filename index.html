@@ -25,7 +25,7 @@
 <body>
     <div id="container">
      <div id="media">
-         <video id="my_video"  style="width:100%;height:100%;" controls="controls" width="100%" height="100%">
+         <video id="my_video" class="mejs-player"  style="width:100%;height:100%;" controls="controls">
             <source type="video/mp4" src="media/video.mp4" />
              <source type="video/ogg" src="media/video.ogg" />
              <track id="sub-titles" src="captions.vtt" kind="captions"  srclang="en" label="English">
@@ -64,9 +64,10 @@
            
             var player = new MediaElementPlayer('#my_video', {
                 pluginPath: 'js/js-webshim/minified/shims',
+                startLanguage: 'en',
                 success: function(mediaElement, originalNode) {               
-               
-
+                my_video.play();
+                    
             }
         });
 
@@ -74,6 +75,7 @@
                 var textTrack = videoElement.textTracks[0];
                 var previouslyActiveCueId = '1';
                 var cueStartTimes = {};
+       
                 setTimeout(function(){               
                      for(var i=1; i<textTrack.cues.length; i++){
                          cueStartTimes[i.toString()] = textTrack.cues[i-1].startTime;                     
