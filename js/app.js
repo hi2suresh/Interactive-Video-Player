@@ -5,6 +5,7 @@ const player = new MediaElementPlayer('#my_video', {
          , startLanguage: 'en',
          hideCaptionsButtonWhenEmpty : false
          , success: function (mediaElement, originalNode) {
+             mediaElement.play();
          }
      });
 
@@ -14,11 +15,11 @@ const textTrack = videoElement.textTracks[0];
 let previouslyActiveCueId = '1';
 const cueStartTimes = {};
 
-//setTimeout(function () {
+setTimeout(function () {
     for (let i = 1; i < textTrack.cues.length; i++) {
         cueStartTimes[i.toString()] = textTrack.cues[i - 1].startTime;
     }
-//}, 1000);
+}, 200);
 
 textTrack.addEventListener('cuechange', function () {
     if (this.activeCues.length === 1) {
@@ -30,7 +31,9 @@ textTrack.addEventListener('cuechange', function () {
 });
 
 divTranscript.addEventListener('click', function(event){
- videoElement.currentTime = cueStartTimes[event.target.id];
+ if(event.target.tagName === 'SPAN'){
+     videoElement.currentTime = cueStartTimes[event.target.id];
+ }
 });
     
 });
