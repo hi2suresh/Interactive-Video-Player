@@ -9,6 +9,7 @@ const player = new MediaElementPlayer('#my_video', {
          }
      });
 
+
 const divTranscript = document.getElementById('transcript');
 const videoElement = player.$media[0];
 const textTrack = videoElement.textTracks[0];
@@ -16,11 +17,19 @@ let previouslyActiveCueId = '1';
 const cueStartTimes = {};
 
 //store the start times of text cues
-setTimeout(function () {
+$('#my_video').bind('loadedmetadata', function(e){
+  // e is Event Object jQuery handles
+ console.log('Metadata loaded successfully');
     for (let i = 1; i < textTrack.cues.length; i++) {
         cueStartTimes[i.toString()] = textTrack.cues[i - 1].startTime;
     }
-}, 200);
+});
+
+/*setTimeout(function () {
+    for (let i = 1; i < textTrack.cues.length; i++) {
+        cueStartTimes[i.toString()] = textTrack.cues[i - 1].startTime;
+    }
+}, 200);*/
 
 textTrack.addEventListener('cuechange', function () {
     if (this.activeCues.length === 1) {
